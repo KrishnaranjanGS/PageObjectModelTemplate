@@ -11,7 +11,7 @@ public class DriverFactory {
 
 	public WebDriver driver;
 	
-	public void initDriver(String browserName) {
+	public WebDriver initDriver(String browserName) {
 		System.out.println("Browser name is: " + browserName);
 		switch (browserName.trim().toLowerCase()) {
 		case "chrome":
@@ -32,7 +32,13 @@ public class DriverFactory {
 			break;
 
 		default:
+			System.out.println("Invalid browser name. Valid browsers are: Chrome, Firefox, Edge, Safari.");
 			break;
 		}
+		if(!(driver==null)) {
+			driver.manage().deleteAllCookies();
+			driver.manage().window().maximize();
+		}
+	return driver;
 	}
 }
