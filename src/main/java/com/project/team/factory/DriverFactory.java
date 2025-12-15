@@ -10,6 +10,7 @@ public class DriverFactory {
 
 
 	public WebDriver driver;
+	public static String highlight;
 	
 	public WebDriver initDriver(String browserName) {
 		System.out.println("Browser name is: " + browserName);
