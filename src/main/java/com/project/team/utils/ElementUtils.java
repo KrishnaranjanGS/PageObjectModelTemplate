@@ -2,7 +2,6 @@ package com.project.team.utils;
 
 import org.openqa.selenium.WebDriver;
 
-
 public class ElementUtils {
 
 	private WebDriver driver;
@@ -11,7 +10,7 @@ public class ElementUtils {
 	public ElementUtils(WebDriver driver) {
 		this.driver = driver;
 	}
-	
+
 //	Utilities:
 	/**
 	 * get page title
