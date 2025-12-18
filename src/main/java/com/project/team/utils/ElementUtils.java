@@ -193,4 +193,32 @@ public class ElementUtils {
 				}
 		}
 	}
+	
+	/**
+	 * Note the windowsHandle, click on link to open new window, switch to new window. Returns original window handle.
+	 * @param locator
+	 * @param parentWindowHandle (optional. If not provided, method will get the window handle before clicking on the link to new window)
+	 * @return String
+	 */
+	public String doSwitchToNewWindow(By locator, String parentWindowHandle) {
+		String originalWindowHandle;
+			if(parentWindowHandle==null) {
+				originalWindowHandle = driver.getWindowHandle();
+			}
+			else {
+				originalWindowHandle = parentWindowHandle;
+			}
+		System.out.println("Parent window handle: " + originalWindowHandle);
+		WebElement element = getElement(locator);
+		element.click();
+		List<String> windowHandles =  new ArrayList<>(driver.getWindowHandles());
+			for(String str: windowHandles) {
+				System.out.println("Checking window handle " + str + "with " + originalWindowHandle);
+					if(!(str.equals(originalWindowHandle))) {
+						System.out.println("Found new window handle " + str + ". Switching to new window/tab.");
+						driver.switchTo().window(str);
+					}
+			}
+		return originalWindowHandle;
+	}
 }
