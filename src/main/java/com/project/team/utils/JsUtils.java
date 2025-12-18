@@ -14,23 +14,24 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class JsUtils {
 
 	WebDriver driver;
+	JavascriptExecutor js;
 
 	public JsUtils(WebDriver driver) {
 		this.driver = driver;
+		js = (JavascriptExecutor) driver;
 	}
 
 	/**
 	 * get page title using JS
 	 */
 	public String getTitleByJs() {
-		JavascriptExecutor js = (JavascriptExecutor) driver;
 		return js.executeScript("return document.title;").toString();
 	}
 
 	/**
 	 * This method returns WebElement.
 	 */
-	public WebElement getElement(By locator) {
+	public WebElement getElementAndFlash(By locator) {
 		WebElement element = driver.findElement(locator);
 			if(Boolean.parseBoolean(com.project.team.factory.DriverFactory.highlight)) {
 				flashElementByJS(element);
@@ -42,7 +43,6 @@ public class JsUtils {
 	 * go to previous page using JS
 	 */
 	public void goBackByJs() {
-		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("history.go(-1);");
 	}
 
@@ -50,7 +50,6 @@ public class JsUtils {
 	 * go to next page using JS
 	 */
 	public void goForwardByJs() {
-		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("history.go(1);");
 	}
 
@@ -58,7 +57,6 @@ public class JsUtils {
 	 * refresh page using JS
 	 */
 	public void refreshBrowserByJs() {
-		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("history.go(0);");
 	}
 
@@ -69,7 +67,6 @@ public class JsUtils {
 	 * @param text
 	 */
 	public void sendKeysByJS(String id, String text) {
-		JavascriptExecutor js = (JavascriptExecutor) driver;
 		String script = "document.getElementById('" + id + "').value='" + text + "';";
 		js.executeScript(script);
 	}
@@ -80,7 +77,6 @@ public class JsUtils {
 	 * @param element
 	 */
 	public void clickByJS(WebElement element) {
-		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].click();", element);
 	}
 
@@ -90,7 +86,6 @@ public class JsUtils {
 	 * @return
 	 */
 	public String getPageInnerTextByJS() {
-		JavascriptExecutor js = (JavascriptExecutor) driver;
 		return js.executeScript("return document.documentElement.innerText;").toString();
 	}
 
@@ -100,7 +95,6 @@ public class JsUtils {
 	 * @param element
 	 */
 	public void drawBorderByJS(WebElement element) {
-		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].style.border='3px solid red'", element);
 	}
 
@@ -118,7 +112,6 @@ public class JsUtils {
 	}
 
 	private void changeColor(String color, WebElement element) {
-		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].style.backgroundColor = '" + color + "'", element);
 		try {
 			Thread.sleep(100);
@@ -130,7 +123,6 @@ public class JsUtils {
 	 * scroll to the bottom of page using JS
 	 */
 	public void scrollTopToBottomByJS() {
-		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollTo(0,document.body.scrollHeight);");
 	}
 
@@ -138,7 +130,6 @@ public class JsUtils {
 	 * scroll to the top of the page
 	 */
 	public void scrollBottomToTopByJS() {
-		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollTo(document.body.scrollHeight,0);");
 	}
 
@@ -148,7 +139,6 @@ public class JsUtils {
 	 * @param height
 	 */
 	public void scrollDownByJS(String height) {
-		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollTo(0, '" + height + "');");
 	}
 
@@ -158,7 +148,6 @@ public class JsUtils {
 	 * @param element
 	 */
 	public void scrollIntoViewByJS(WebElement element) {
-		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].scrollIntoView(true);", element);
 	}
 
@@ -170,7 +159,6 @@ public class JsUtils {
 	public void waitForPageLoad(int timeOut) {
 		long endTime = System.currentTimeMillis() + timeOut;
 		while (System.currentTimeMillis() < endTime) {
-			JavascriptExecutor js = (JavascriptExecutor) driver;
 			String pageState = js.executeScript("return document.readyState").toString();
 			if (pageState.equals("complete")) {
 				System.out.println("page DOM is fully loaded now..");
