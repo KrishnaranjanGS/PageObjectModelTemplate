@@ -16,11 +16,13 @@ public class JsUtils {
 	WebDriver driver;
 	JavascriptExecutor js;
 
+//	constructor:
 	public JsUtils(WebDriver driver) {
 		this.driver = driver;
 		js = (JavascriptExecutor) driver;
 	}
 
+//	Utilities:
 	/**
 	 * get page title using JS
 	 */
