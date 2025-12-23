@@ -163,7 +163,7 @@ public class ElementUtils {
 	 */
 	public List<String> getDropDownOptionsTextList(By locator) {
 		List<WebElement> optionsList = doGetDropDownOptionsList(locator);
-		List<String> optionsTextList = new ArrayList();
+		List<String> optionsTextList = new ArrayList<String>();
 		for (WebElement e : optionsList) {
 			String text = e.getText();
 			optionsTextList.add(text);
@@ -272,5 +272,7 @@ public class ElementUtils {
 			break;
 		}
 	}
+	
+
 	
 }
